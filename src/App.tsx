@@ -3,7 +3,6 @@ import {
   Button,
   Stack,
   TextareaAutosize,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -52,14 +51,16 @@ function App() {
       startIdx = vars.indexOf("var", endIdx);
       endIdx = vars.indexOf(";", startIdx);
     }
+    console.log("code", code);
     return code;
   };
 
   const replaceCode = (componentCode: string, code: string[]) => {
     for (const c of code) {
       const [buildCode, changedCode] = c.split("=");
-      componentCode = componentCode.replace(buildCode, changedCode);
-      componentCode = componentCode.replace('["default"]', "");
+      componentCode = componentCode.replaceAll(buildCode, changedCode);
+      componentCode = componentCode.replaceAll('["default"]', "");
+      console.log("componentCode", componentCode);
     }
     return componentCode;
   };
