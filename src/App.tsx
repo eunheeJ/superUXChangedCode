@@ -7,12 +7,14 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { AlertComponent } from "./component/AlertComponent";
 
 type TInput = {
   value: string;
   code: string;
 };
 function App() {
+  const [openAlert, setOpenAlert] = React.useState(false);
   const { register, handleSubmit, reset } = useForm<TInput>();
   const [changedCode, setChangedCode] = React.useState<string>("");
 
@@ -75,6 +77,10 @@ function App() {
     reset();
     setChangedCode("");
   };
+  const onClickCopyCode = () => {
+    window.navigator.clipboard.writeText(changedCode);
+    setOpenAlert(true);
+  };
 
   return (
     <Box
@@ -88,11 +94,11 @@ function App() {
       </Typography>
       <Stack sx={{ mt: "20px" }}>
         <Typography>선언된 변수들을 입력해주세요</Typography>
-        <TextareaAutosize minRows={10} {...register("value")} />
+        <TextareaAutosize minRows={10} maxRows={30} {...register("value")} />
         <Typography sx={{ mt: "30px" }}>
           변환 될 코드를 입력해주세요.
         </Typography>
-        <TextareaAutosize minRows={10} {...register("code")} />
+        <TextareaAutosize minRows={10} maxRows={30} {...register("code")} />
         <Stack direction={"row"}>
           <Button
             variant="contained"
@@ -103,7 +109,11 @@ function App() {
           </Button>
           <Button
             variant="outlined"
-            sx={{ mt: "10px", width: "100px", ml: "10px" }}
+            sx={{
+              mt: "10px",
+              width: "100px",
+              ml: "10px",
+            }}
             onClick={resetCode}
           >
             초기화
@@ -112,13 +122,25 @@ function App() {
         <Stack direction={"row"} alignItems={"center"} sx={{ mt: "30px" }}>
           <Typography>변환 된 코드</Typography>
           <Button
-            onClick={() => window.navigator.clipboard.writeText(changedCode)}
+            variant="contained"
+            sx={{ ml: "10px" }}
+            onClick={onClickCopyCode}
           >
             변환 된 코드 복사하기
           </Button>
         </Stack>
-        <pre>{changedCode}</pre>
+        <Box
+          sx={{
+            mt: "10px",
+            height: "500px",
+            border: "1px solid black",
+            overflow: "scroll",
+          }}
+        >
+          <pre>{changedCode}</pre>
+        </Box>
       </Stack>
+      <AlertComponent open={openAlert} setOpen={setOpenAlert} />
     </Box>
   );
 }
