@@ -109,9 +109,15 @@ function App() {
             초기화
           </Button>
         </Stack>
-
-        <Typography sx={{ mt: "30px" }}>변환 된 코드</Typography>
-        <Typography>{changedCode}</Typography>
+        <Stack direction={"row"} alignItems={"center"} sx={{ mt: "30px" }}>
+          <Typography>변환 된 코드</Typography>
+          <Button
+            onClick={() => window.navigator.clipboard.writeText(changedCode)}
+          >
+            변환 된 코드 복사하기
+          </Button>
+        </Stack>
+        <pre>{changedCode}</pre>
       </Stack>
     </Box>
   );
