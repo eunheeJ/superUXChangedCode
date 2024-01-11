@@ -87,9 +87,9 @@ function App() {
       onSubmit={handleSubmit(onSubmit)}
       sx={{ p: "20px" }}
     >
-      <Typography sx={{ fontSize: "10px" }}>
-        사용 가능한 라이브러리 : '@mui/material": "5.15.2" ,
-        @mui/icons-material'
+      <Typography>
+        사용 가능한 라이브러리 : @mui/material: 5.15.2 ,
+        @mui/icons-material
       </Typography>
       <Stack sx={{ mt: "20px" }}>
         <Typography>선언된 변수들을 입력해주세요</Typography>
