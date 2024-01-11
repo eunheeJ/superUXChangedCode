@@ -53,7 +53,6 @@ function App() {
       startIdx = vars.indexOf("var", endIdx);
       endIdx = vars.indexOf(";", startIdx);
     }
-    console.log("code", code);
     return code;
   };
 
@@ -94,11 +93,11 @@ function App() {
       </Typography>
       <Stack sx={{ mt: "20px" }}>
         <Typography>선언된 변수들을 입력해주세요</Typography>
-        <TextareaAutosize minRows={10} maxRows={30} {...register("value")} />
+        <TextareaAutosize minRows={10} maxRows={10} {...register("value")} />
         <Typography sx={{ mt: "30px" }}>
           변환 될 코드를 입력해주세요.
         </Typography>
-        <TextareaAutosize minRows={10} maxRows={30} {...register("code")} />
+        <TextareaAutosize minRows={10} maxRows={10} {...register("code")} />
         <Stack direction={"row"}>
           <Button
             variant="contained"
